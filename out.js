@@ -1,84 +1,81 @@
 console.log("get ready! Rock, paper or scissors?")
 let message;
 // ctr-/ to comment
-// let variables userScore and computerScore =0
-let userScore=0;
+// let variables humanScore and computerScore =0
+let humanScore=0;
 let computerScore=0;
-// create variables (testing feitj)
-
-
-computerChoice = "PAPER";
-
-
-// get input from user store it in variable userChoice (ALL UPPERCASE)
-function getUserChoice() {
-let userChoice = prompt("Rock, paper or scissors?",);
-return userChoice.toUpperCase();
+// get input from user to store it in variable humanChoice (ALL UPPERCASE)
+function getHumanChoice() {
+let humanChoice = prompt("Rock, paper or scissors?",);
+return humanChoice.toUpperCase();
 }
-// function for computer's choice, store it in computerChoice
-
-
+// function to randoming computer's choice to store it in computerChoice
+function getComputerChoice() {
+   random=Math.floor(Math.random()*9)+1;
+   return random<=3?"ROCK":
+          random<=6?"PAPER":
+          "SCISSORS";
+}
 // Win-lose logic 1 round
-//    if userChoice the same as computerChoice: log "It's a tie".
+//    if humanChoice the same as computerChoice: log "It's a tie".
 //    else 
 //       computerChoice is "ROCK"
-//         userChoice is "PAPER": log "1 point to u", userScore add 1
-//         userChoice is "SCISSORS": log "1 point to me", computerScore add 1 (...)
-function roundLogic(userChoice,computerChoice){
-// log computerChoice for user to see(combine to playRound later)
-console.log(computerChoice+"!!")
-if (userChoice===computerChoice) {
+//         humanChoice is "PAPER": log "1 point to u", humanScore add 1
+//         humanChoice is "SCISSORS": log "1 point to me", computerScore add 1 (...)
+function roundLogic(humanChoice,computerChoice){
+if (humanChoice===computerChoice) {
     console.log("It's a tie...");
-    console.log("Your Score:"+userScore);
+    console.log("Your Score:"+humanScore);
     console.log("My Score:"+computerScore);
 } else if (computerChoice==="ROCK") {
-    message= userChoice==="PAPER"?  "1 point to u" : "1 point to me";
+    message= humanChoice==="PAPER"?  "1 point to u" : "1 point to me";
     console.log(message);
-    if (userChoice==="PAPER") {
-        userScore+=1;
+    if (humanChoice==="PAPER") {
+        humanScore+=1;
     } else {
         computerScore+=1;
     }
-    console.log("Your Score:"+userScore);
+    console.log("Your Score:"+humanScore);
     console.log("My Score:"+computerScore);
 } else if (computerChoice==="PAPER") {
-    message= userChoice==="SCISSORS"?  "1 point to u" : "1 point to me";
+    message= humanChoice==="SCISSORS"?  "1 point to u" : "1 point to me";
     console.log(message);
-    if (userChoice==="SCISSORS") {
-        userScore+=1;
+    if (humanChoice==="SCISSORS") {
+        humanScore+=1;
     } else {
         computerScore+=1;
     }
-    console.log("Your Score:"+userScore);
+    console.log("Your Score:"+humanScore);
     console.log("My Score:"+computerScore);
 } else if (computerChoice==="SCISSORS") {
-    message= userChoice==="ROCK"?  "1 point to u" : "1 point to me";
+    message= humanChoice==="ROCK"?  "1 point to u" : "1 point to me";
     console.log(message);
-    if (userChoice==="ROCK") {
-        userScore+=1;
+    if (humanChoice==="ROCK") {
+        humanScore+=1;
     } else {
         computerScore+=1;
     }
-    console.log("Your Score:"+userScore);
+    console.log("Your Score:"+humanScore);
     console.log("My Score:"+computerScore);
 }
 }
 // combine into one round
-
+function playRound(){
+    humanChoice=getHumanChoice();
+    computerChoice=getComputerChoice();
+    // log computerChoice for user to see(combine to playRound later)
+    console.log(computerChoice+"!!")
+    roundLogic(humanChoice,computerChoice);
+}
 // combine all logic into 1
 function playGame() {
-    userChoice=getUserChoice();
-    roundLogic(userChoice,computerChoice);
-    userChoice=getUserChoice();
-    roundLogic(userChoice,computerChoice);
-    userChoice=getUserChoice();
-    roundLogic(userChoice,computerChoice);
-    userChoice=getUserChoice();
-    roundLogic(userChoice,computerChoice);
-    userChoice=getUserChoice();
-    roundLogic(userChoice,computerChoice);
-    message= userScore>computerScore? "YOU WON :))" :
-             userScore==computerScore? "TIE!!":
+    playRound();
+    playRound();
+    playRound();
+    playRound();
+    playRound();
+    message= humanScore>computerScore? "YOU WON :))" :
+             humanScore==computerScore? "TIE!!":
              "YOU LOST :((";
     console.log(message);
 }
